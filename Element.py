@@ -1,10 +1,12 @@
+from collections import OrderedDict
+
 class Element:
   """ This class is for a css element style. It will also determine whether or
       not css properties are relevant. """
 
   def __init__(self, rule):
     self.selector = ""
-    self.properties = {}
+    self.properties = OrderedDict()
     self.populate(rule)
 
   def populate(self, rule):
