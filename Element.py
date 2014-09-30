@@ -10,4 +10,8 @@ class Element:
 
   def seperate(cssLine):
     splittedLine = cssLine.strip('}').split('{')
-    selector = splittedLine[0]
+    self.selector = splittedLine[0]
+    propertiesSet = splittedLine[1]
+    for prop in propertiesSet:
+      relevantProperty = prop.split(';')
+      self.properties[relevantProperty[0]] = relevantProperty[1]
