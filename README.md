@@ -6,6 +6,6 @@ This will make a css file containing only the relevant properties and elements t
 Usage:
 ------
     rtlhelper.py -i <inputfile> -o <outputfile> -r
-i: input file
-o: output file
-r: optional - replace left with right
++ i: input file
++ o: output file
++ r: optional - replace left with right
