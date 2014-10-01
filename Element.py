@@ -30,11 +30,3 @@ class Element:
     for cssProperty, value in iter(self.properties.items()):
       cssProperties += '  ' + cssProperty + ':' + value + ';\n'
     return self.selector + '{\n' + cssProperties + '}'
-
-
-def main():
-  El = Element('.sd > ff {height: 40px; float: left; margin: 4px 4px 5px 10px; padding-left: 40px; position: right }')
-  print(El)
-
-if __name__ == '__main__':
-  main()
