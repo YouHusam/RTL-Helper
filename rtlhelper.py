@@ -66,18 +66,22 @@ def main(argv):
   try:
     with open(inputfile, 'rt') as inFile:
       cssFile = inFile.read()
-    try:
-      outFile = open(outputfile, 'w')
-      arr = cssFile.split('}')
-      for rule in arr:
-        el = Element(rule + '}')
-        outFile.write(str(el))
-      outFile.close()
-
-    except:
-      print('Error while trying to write to the file.')
   except:
-    print('Error while opening the file.')
+    print('Error while opening the file. Make sure the file exists and that you have permissions to read it.')
+    sys.exit(2)
+
+  try:
+    outFile = open(outputfile, 'w')
+    print('Processing...')
+    elements = cssFile.split('}')
+    for element in elements:
+      el = Element(element + '}')
+      outFile.write(str(el))
+    outFile.close()
+    print('Done!')
+  except:
+    print('Error while writing to file. Make sure you have write permissions.')
+
 
 if __name__ == '__main__':
   main(sys.argv[1:])
