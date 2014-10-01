@@ -1,5 +1,4 @@
 import sys, getopt
-from Element import Element
 from collections import OrderedDict
 
 class Element:
@@ -41,23 +40,44 @@ class Element:
       return ''
 
 
-def main():
+def main(argv):
+  inputfile = ''
+  outputfile = ''
   try:
-    with open('testfile.css', 'rt') as inFile:
+     opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
+  except getopt.GetoptError:
+     print ('rtlhelper.py -i <inputfile> -o <outputfile>')
+     sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-h':
+      print ('rtlhelper.py -i <inputfile> -o <outputfile>')
+      sys.exit()
+    elif arg =='-o' or arg == '' or arg == '-i' or opt == '':
+        print ('rtlhelper.py -i <inputfile> -o <outputfile>')
+        sys.exit(2)
+    elif opt in ("-i", "--ifile"):
+      inputfile = arg
+    elif opt in ("-o", "--ofile"):
+      outputfile = arg
+
+  print ('Input file is: '+ inputfile)
+  print ('Output file is: '+ outputfile)
+
+  try:
+    with open(inputfile, 'rt') as inFile:
       cssFile = inFile.read()
     try:
-
-      outFile = open('outfile.css', 'w')
+      outFile = open(outputfile, 'w')
       arr = cssFile.split('}')
       for rule in arr:
         el = Element(rule + '}')
         outFile.write(str(el))
       outFile.close()
-    except:
 
+    except:
       print('Error while trying to write to the file.')
   except:
     print('Error while opening the file.')
 
 if __name__ == '__main__':
-  main()
+  main(sys.argv[1:])
