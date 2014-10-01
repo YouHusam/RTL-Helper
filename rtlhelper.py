@@ -5,7 +5,7 @@ class Element:
   """ This class is for a css element style. It will also determine whether or
       not css properties are relevant. """
 
-  KEYWORDS = ['left', 'right', 'margin', 'padding', 'border',
+  KEYWORDS = ['left', 'right', 'margin', 'padding',
    'background:', 'position', 'float', 'shadow']
 
   def __init__(self, rule):
@@ -19,7 +19,7 @@ class Element:
   def populate(self, rule):
     """ Populate the properties dict with the relevant properties """
     splittedRule = rule.strip('}').split('{')
-    self.selector = splittedRule[0]
+    self.selector = splittedRule[0].strip()
     propertiesList = splittedRule[1].split(';')
     for prop in propertiesList:
       for kw in Element.KEYWORDS:
@@ -28,17 +28,25 @@ class Element:
             border, float """
         if kw in prop:
           relevantProperty = prop.split(':')
-          self.properties[relevantProperty[0].strip()] = relevantProperty[1].strip()
+          cssProperty= relevantProperty[0].strip()
+          value = relevantProperty[1].strip()
+          if 'bottom' in cssProperty or 'top' in cssProperty: break
+          if cssProperty == 'padding' or cssProperty == 'margin':
+            if len(value.split(' ')) == 4:
+              if value.split(' ')[1] and value.split(' ')[3] == 0:
+                break
+            else: break
+
+          self.properties[cssProperty] = value
 
   def __str__(self):
     try:
       cssProperties = ''
       for cssProperty, value in iter(self.properties.items()):
-        cssProperties += '  {0} : {1};\n'.format(cssProperty, value)
-      return self.selector + ' {\n'+cssProperties+ '}\n'
+        cssProperties += '  {0}: {1};\n'.format(cssProperty, value)
+      return self.selector + ' {\n'+cssProperties+ '}\n' if not cssProperties == '' else ''
     except:
       return ''
-
 
 def main(argv):
   inputfile = ''
