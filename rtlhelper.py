@@ -1,3 +1,5 @@
+import sys, getopt
+from Element import Element
 from collections import OrderedDict
 
 class Element:
@@ -38,10 +40,24 @@ class Element:
     except:
       return ''
 
-"""def main():
-  El = Element('.sd > ff { height: 40px;  }')
-  print(El)
+
+def main():
+  try:
+    with open('testfile.css', 'rt') as inFile:
+      cssFile = inFile.read()
+    try:
+
+      outFile = open('outfile.css', 'w')
+      arr = cssFile.split('}')
+      for rule in arr:
+        el = Element(rule + '}')
+        outFile.write(str(el))
+      outFile.close()
+    except:
+
+      print('Error while trying to write to the file.')
+  except:
+    print('Error while opening the file.')
 
 if __name__ == '__main__':
   main()
-"""
