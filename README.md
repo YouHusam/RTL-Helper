@@ -1,7 +1,7 @@
 RTL-Helper
 ==========
 
-This will make a css file containing only the relevant properties and elements. It also has the option to replace the words "left" and "right" and it will also change the 4 value padding and margin.
+This will make a css file containing only the relevant properties and elements to help with converting css from rtl to ltr. It also has the option to replace the words "left" and "right" and it will also change the 4 value padding and margin.
 
 Usage:
 ------
