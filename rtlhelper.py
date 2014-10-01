@@ -39,9 +39,8 @@ class Element:
               elif rep:
                 valueArray[1], valueArray[3] = valueArray[3], valueArray[1]
                 value = ' '.join(valueArray)
-
             else: break
-          elif rep:
+          elif rep: #replace left with right
             cssProperty = cssProperty.replace('left', 'l-ft')
             cssProperty = cssProperty.replace('right', 'left')
             cssProperty = cssProperty.replace('l-ft', 'right')
@@ -68,16 +67,16 @@ def main(argv):
   try:
      opts, args = getopt.getopt(argv,"rhi:o:",["ifile=","ofile="])
   except getopt.GetoptError:
-     print ('rtlhelper.py -i <inputfile> -o <outputfile>')
+     print ('rtlhelper.py -i <inputfile> -o <outputfile> -r')
      sys.exit(2)
   for opt, arg in opts:
     if opt == '-h':
-      print ('rtlhelper.py -i <inputfile> -o <outputfile>')
+      print ('rtlhelper.py -i <inputfile> -o <outputfile> -r')
       sys.exit()
     elif opt == '-r':
       rep = True
     elif arg =='-o' or arg == '' or arg == '-i' or opt == '':
-        print ('rtlhelper.py -i <inputfile> -o <outputfile>')
+        print ('rtlhelper.py -i <inputfile> -o <outputfile> -r')
         sys.exit(2)
     elif opt in ("-i", "--ifile"):
       inputfile = arg
