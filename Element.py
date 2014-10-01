@@ -30,12 +30,6 @@ class Element:
           self.properties[relevantProperty[0].strip()] = relevantProperty[1].strip()
 
   def __str__(self):
-<<<<<<< HEAD
-    cssProperties = ''
-    for cssProperty, value in iter(self.properties.items()):
-      cssProperties += '  ' + cssProperty + ':' + value + ';\n'
-    return self.selector + '{\n' + cssProperties + '}'
-=======
     try:
       cssProperties = ''
       for cssProperty, value in iter(self.properties.items()):
@@ -51,4 +45,3 @@ class Element:
 if __name__ == '__main__':
   main()
 """
->>>>>>> properties
